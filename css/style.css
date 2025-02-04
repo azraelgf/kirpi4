@@ -971,35 +971,61 @@ textarea.input {
   display: flex;
   max-width: 68.75rem
 }
+.item-office-map {
+  display: none;
+  position: absolute;
+  background: var(--white);
+  padding: .625rem;
+  z-index: 1000;
+  border-radius: .1875rem;
+  max-width: 18.75rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,.2)
+}
+.item-office-map.active {
+  display: block
+}
+.item-office-map__img,
 .item-office__img {
   margin-bottom: .75rem
 }
+.item-office-map__title,
 .item-office__title {
   font-weight: 600;
   line-height: 1.25
 }
+.item-office-map__category,
 .item-office__category {
   line-height: 150%;
   padding-bottom: .5rem;
   margin-bottom: .5rem;
   border-bottom: 1px solid var(--primary10)
 }
+.item-office-map__link,
 .item-office__link {
   font-weight: 500;
   line-height: 1.25;
   margin-bottom: .75rem
 }
+.item-office-map__actions,
 .item-office__actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between
 }
+.item-office-map__socials,
 .item-office__socials {
   display: flex
 }
+.item-office-map__socials a,
 .item-office__socials a {
   transition: color .3s ease-in-out
+}
+.item-office-map__title {
+  margin-bottom: .625rem
+}
+.item-office-map__link {
+  margin-bottom: .25rem
 }
 .cases {
   padding-bottom: 1.875rem
@@ -1063,7 +1089,8 @@ textarea.input {
   border-radius: .1875rem
 }
 #map {
-  width: 100%
+  width: 100%;
+  overflow: hidden
 }
 .product {
   position: relative;
@@ -1670,24 +1697,31 @@ textarea.input {
   .offices__items {
     gap: 1.875rem
   }
+  .item-office-map__img,
   .item-office__img {
     margin-bottom: .75rem
   }
+  .item-office-map__title,
   .item-office__title {
     font-size: 1rem
   }
+  .item-office-map__category,
   .item-office__category {
     font-size: 1rem
   }
+  .item-office-map__link,
   .item-office__link {
     font-size: 1rem
   }
+  .item-office-map__actions,
   .item-office__actions {
     gap: 1rem
   }
+  .item-office-map__socials,
   .item-office__socials {
     gap: .625rem
   }
+  .item-office-map__socials a,
   .item-office__socials a {
     font-size: 1.75rem
   }
@@ -2106,7 +2140,8 @@ textarea.input {
   .offices__items {
     flex-wrap: wrap
   }
-  .item-office {
+  .item-office,
+  .item-office-map {
     flex: 1 1 47%
   }
   .case {
@@ -2212,6 +2247,9 @@ textarea.input {
   }
   .about__img {
     flex: 1 1 100%
+  }
+  .item-office-map {
+    max-width: 13.75rem
   }
   .cases__items {
     flex-wrap: wrap
@@ -2463,24 +2501,31 @@ textarea.input {
   .offices__items {
     gap: 1.25rem
   }
+  .item-office-map__img,
   .item-office__img {
     margin-bottom: .5rem
   }
+  .item-office-map__title,
   .item-office__title {
     font-size: .75rem
   }
+  .item-office-map__category,
   .item-office__category {
     font-size: .625rem
   }
+  .item-office-map__link,
   .item-office__link {
     font-size: .875rem
   }
+  .item-office-map__actions,
   .item-office__actions {
     gap: .5rem
   }
+  .item-office-map__socials,
   .item-office__socials {
     gap: .5rem
   }
+  .item-office-map__socials a,
   .item-office__socials a {
     font-size: 1.25rem
   }
@@ -2799,24 +2844,31 @@ textarea.input {
   .offices__items {
     gap: clamp(1.25rem ,1.0416666667rem + .9259259259vw ,1.875rem)
   }
+  .item-office-map__img,
   .item-office__img {
     margin-bottom: clamp(.5rem ,.4166666667rem + .3703703704vw ,.75rem)
   }
+  .item-office-map__title,
   .item-office__title {
     font-size: clamp(.75rem ,.6666666667rem + .3703703704vw ,1rem)
   }
+  .item-office-map__category,
   .item-office__category {
     font-size: clamp(.625rem ,.5rem + .5555555556vw ,1rem)
   }
+  .item-office-map__link,
   .item-office__link {
     font-size: clamp(.875rem ,.8333333333rem + .1851851852vw ,1rem)
   }
+  .item-office-map__actions,
   .item-office__actions {
     gap: clamp(.5rem ,.3333333333rem + .7407407407vw ,1rem)
   }
+  .item-office-map__socials,
   .item-office__socials {
     gap: clamp(.5rem ,.4583333333rem + .1851851852vw ,.625rem)
   }
+  .item-office-map__socials a,
   .item-office__socials a {
     font-size: clamp(1.25rem ,1.0833333333rem + .7407407407vw ,1.75rem)
   }
@@ -3033,6 +3085,7 @@ textarea.input {
   .item-services:hover:before {
     right: -20%
   }
+  .item-office-map__socials a:hover,
   .item-office__socials a:hover {
     color: var(--accent)
   }
