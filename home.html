@@ -6,11 +6,11 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20250204214533">
+	<link rel="stylesheet" href="css/style.min.css?_v=20250205053834">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=8642c547-cf6d-4f43-8167-45e38cb806d2&_v=20250204214533" type="text/javascript"></script>
+	<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=8642c547-cf6d-4f43-8167-45e38cb806d2&_v=20250205053834" type="text/javascript"></script>
 </head>
 
 <body>
@@ -2076,44 +2076,69 @@
 
 					var mapContainer = document.getElementById('map').getBoundingClientRect();
 
-					// Переводим координаты в локальные для блока карты
-					officeElement.style.left = `${pixelCoords[0] - mapContainer.left}px`;
-					officeElement.style.top = `${pixelCoords[1] - mapContainer.top}px`;
+					// Центрируем попап относительно маркера
+					officeElement.style.left = `${pixelCoords[0] - mapContainer.left - officeElement.offsetWidth / 2}px`;
+					officeElement.style.top = `${pixelCoords[1] - mapContainer.top - officeElement.offsetHeight - 10}px`;
 
 					officeElement.style.display = 'block';
-				}
-			}
 
-			function hidePopup(e) {
-				var officeId = e.get('target').properties.get('officeId');
-				var officeElement = document.querySelector(`.item-office-map[data-id="${officeId}"]`);
-
-				if (officeElement) {
-					officeElement.style.display = 'none';
+					if (!isMobile()) {
+						officeElement.addEventListener('mouseleave', function hidePopup() {
+							officeElement.style.display = 'none';
+							officeElement.removeEventListener('mouseleave', hidePopup);
+						});
+					}
 				}
 			}
 
 			placemarks.forEach(placemark => {
 				myMap.geoObjects.add(placemark);
 
-				placemark.events.add('mouseenter', showPopup);
-				placemark.events.add('mouseleave', hidePopup);
-				placemark.events.add('click', showPopup); // Добавляем поддержку клика
-			});
+				if (isMobile()) {
+					// На мобильных попап открывается по клику и остается
+					placemark.events.add('click', function(e) {
+						// Закрываем все другие попапы перед открытием нового
+						document.querySelectorAll('.item-office-map').forEach(el => el.style.display = 'none');
+						showPopup(e);
+					});
+				} else {
+					// На ПК попап открывается при наведении
+					placemark.events.add('mouseenter', function(e) {
+						showPopup(e);
+					});
 
-			// Закрытие попапа при клике вне его
-			document.addEventListener('click', function(e) {
-				if (!e.target.closest('.item-office-map')) {
-					document.querySelectorAll('.item-office-map').forEach(el => {
-						el.style.display = 'none';
+					placemark.events.add('mouseleave', function(e) {
+						var officeId = e.get('target').properties.get('officeId');
+						var officeElement = document.querySelector(`.item-office-map[data-id="${officeId}"]`);
+
+						if (officeElement) {
+							setTimeout(() => {
+								if (!officeElement.matches(':hover')) {
+									officeElement.style.display = 'none';
+								}
+							}, 300);
+						}
 					});
 				}
 			});
+
+			// Закрытие попапа на мобильных устройствах при клике вне попапа или на другой маркер
+			if (isMobile()) {
+				document.addEventListener('click', function(e) {
+					if (!e.target.closest('.item-office-map') && !e.target.closest('.ymaps-2-1-79-image')) {
+						document.querySelectorAll('.item-office-map').forEach(el => el.style.display = 'none');
+					}
+				});
+			}
+
+			function isMobile() {
+				return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+			}
 		});
 	</script>
-	<script src="js/app.min.js?_v=20250204214533"></script>
+	<script src="js/app.min.js?_v=20250205053834"></script>
 
-	<!--<script src="js/app.min.js?_v=20250204214533"></script>
+	<!--<script src="js/app.min.js?_v=20250205053834"></script>
 -->
 </body>
 
