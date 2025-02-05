@@ -563,7 +563,7 @@ textarea.input {
   z-index: 2;
   top: 0;
   left: 0;
-  border-radius: .1875rem;
+  border-radius: .1875rem 0 .1875rem;
   padding: .375rem .5rem;
   color: var(--white);
   display: inline-flex;
@@ -834,7 +834,6 @@ textarea.input {
 .partners__block {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 4.375rem
 }
 .partners__link {
@@ -961,6 +960,9 @@ textarea.input {
 }
 .about__text p+p {
   margin-top: 1rem
+}
+.about__img {
+  flex: 0 0 48%
 }
 .offices__container {
   display: flex;
@@ -1302,11 +1304,6 @@ textarea.input {
     flex-direction: column
   }
 }
-@media (min-width:35.99875em) {
-  .item-benefit_small {
-    min-height: 8.125rem
-  }
-}
 @media (min-width:47.99875em) {
   .item-services__img {
     position: absolute;
@@ -1373,6 +1370,9 @@ textarea.input {
     translate: 0 -50%;
     border-radius: 50%;
     transition: right .3s ease-in-out
+  }
+  .item-services__title {
+    max-width: 15.9375rem
   }
   .about__container {
     align-items: flex-end
@@ -1448,9 +1448,6 @@ textarea.input {
   }
   .menu-footer {
     gap: 5rem
-  }
-  .item-benefit {
-    min-height: 13.375rem
   }
   .item-benefit {
     padding-top: 1.25rem
@@ -1590,7 +1587,7 @@ textarea.input {
     font-size: 6rem
   }
   .sale-item__text {
-    max-width: 43.125rem
+    max-width: 35.3125rem
   }
   .sale-item__text {
     font-size: 1.25rem
@@ -1838,9 +1835,6 @@ textarea.input {
   .item-services__img {
     height: 5rem
   }
-  .item-benefit {
-    min-height: 9.0625rem
-  }
 }
 @media (max-width:30em) {
   .menu-footer {
@@ -2067,12 +2061,14 @@ textarea.input {
   .item-offer__img {
     flex: 0 0 22%
   }
+  .partners__block {
+    justify-content: space-between
+  }
   .item-services {
     flex: 0 1 48%
   }
   .item-benefit {
-    flex: 1 1 100%;
-    min-height: 9.0625rem
+    flex: 1 1 100%
   }
   .item-benefit_small {
     flex: 1 1 47%
@@ -2156,7 +2152,6 @@ textarea.input {
     display: none
   }
   .item-benefit_small {
-    min-height: initial;
     background-color: rgba(0,0,0,0);
     box-shadow: none;
     padding-left: 0
@@ -2737,7 +2732,7 @@ textarea.input {
     font-size: clamp(1.875rem ,.5rem + 6.1111111111vw ,6rem)
   }
   .sale-item__text {
-    max-width: clamp(11.875rem ,1.4583333333rem + 46.2962962963vw ,43.125rem)
+    max-width: clamp(11.875rem ,4.0625rem + 34.7222222222vw ,35.3125rem)
   }
   .sale-item__text {
     font-size: clamp(.75rem ,.5833333333rem + .7407407407vw ,1.25rem)
@@ -3012,11 +3007,6 @@ textarea.input {
   }
   .item-services__img {
     height: clamp(5rem ,3.7848101266rem + 2.5316455696vw ,6rem)
-  }
-}
-@media (min-width:48em)and (max-width:75em) {
-  .item-benefit {
-    min-height: clamp(9.0625rem ,1.3958333333rem + 15.9722222222vw ,13.375rem)
   }
 }
 @media (min-width:30em)and (max-width:87.5em) {
