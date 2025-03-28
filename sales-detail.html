@@ -5,17 +5,16 @@
 	<title>Акции</title>
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
-	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css">
+	<link rel="stylesheet" href="css/style.min.css?_v=20250328190257">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=8642c547-cf6d-4f43-8167-45e38cb806d2" type="text/javascript"></script>
+	<!--	 <style>body{opacity: 0;}</style>-->
 	<style>
 		/* Начальное состояние */
 		body {
 			opacity: 0;
-			transition: opacity 0.3s ease-in-out;
+			transition: opacity 0.5s ease-in-out;
 		}
 
 		/* Класс, добавляемый после загрузки */
@@ -2037,73 +2036,6 @@
 				</div>
 			</section>
 
-			<section class="map map_inner">
-				<div class="map-container">
-					<div id="map"></div>
-
-					<!-- Попапы офисов -->
-					<div class="item-office-map" data-id="office1">
-						<div class="item-office-map__img">
-							<img class="ibg" src="img/offices/01.webp" alt="Image">
-						</div>
-						<div class="item-office-map__title">Мамадышский тракт, 56А</div>
-						<a href="tel:+79999999999" class="item-office-map__link">+7999999-99-99</a>
-						<div class="item-office-map__actions">
-							<a href="" class="button">Проложить маршрут</a>
-							<div class="item-office-map__socials">
-								<a class="_icon-telegram" href=""></a>
-								<a class="_icon-wa" href=""></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="item-office-map" data-id="office2">
-						<div class="item-office-map__img">
-							<img class="ibg" src="img/offices/02.webp" alt="Image">
-						</div>
-						<div class="item-office-map__title">ул. Центральная, 200</div>
-						<a href="tel:+78888888888" class="item-office-map__link">+7888888-88-88</a>
-						<div class="item-office-map__actions">
-							<a href="" class="button">Проложить маршрут</a>
-							<div class="item-office-map__socials">
-								<a class="_icon-telegram" href=""></a>
-								<a class="_icon-wa" href=""></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="item-office-map" data-id="office3">
-						<div class="item-office-map__img">
-							<img class="ibg" src="img/offices/03.webp" alt="Image">
-						</div>
-						<div class="item-office-map__title">ул. Азина, 72</div>
-						<a href="tel:+77777777777" class="item-office-map__link">+7777777-77-77</a>
-						<div class="item-office-map__actions">
-							<a href="" class="button">Проложить маршрут</a>
-							<div class="item-office-map__socials">
-								<a class="_icon-telegram" href=""></a>
-								<a class="_icon-wa" href=""></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="item-office-map" data-id="office4">
-						<div class="item-office-map__img">
-							<img class="ibg" src="img/offices/04.webp" alt="Image">
-						</div>
-						<div class="item-office-map__title">ул. Заводская, 7</div>
-						<a href="tel:+76666666666" class="item-office-map__link">+7666666-66-66</a>
-						<div class="item-office-map__actions">
-							<a href="" class="button">Проложить маршрут</a>
-							<div class="item-office-map__socials">
-								<a class="_icon-telegram" href=""></a>
-								<a class="_icon-wa" href=""></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-
 		</main>
 		<footer class="footer">
 			<div class="footer__top top-footer">
@@ -2172,106 +2104,7 @@
 		</footer>
 
 	</div>
-	<script>
-		ymaps.ready(function() {
-			var myMap = new ymaps.Map('map', {
-				center: [55.796660, 49.133930],
-				zoom: 10
-			}, {
-				searchControlProvider: 'yandex#search'
-			});
-
-			function createPlacemark(coords, id) {
-				return new ymaps.Placemark(coords, {
-					officeId: id
-				}, {
-					iconLayout: 'default#imageWithContent',
-					iconImageHref: 'img/icons/bxs_map.webp',
-					iconImageSize: [56, 56],
-					iconImageOffset: [-28, -28]
-				});
-			}
-
-			var placemarks = [
-				createPlacemark([55.800711, 49.259199], 'office1'),
-				createPlacemark([55.732372, 49.310116], 'office2'),
-				createPlacemark([55.874269, 49.250342], 'office3'),
-				createPlacemark([55.612263, 49.414132], 'office4')
-			];
-
-			function showPopup(e) {
-				var officeId = e.get('target').properties.get('officeId');
-				var officeElement = document.querySelector(`.item-office-map[data-id="${officeId}"]`);
-
-				if (officeElement) {
-					var coords = e.get('target').geometry.getCoordinates();
-					var pixelCoords = myMap.converter.globalToPage(
-						myMap.options.get('projection').toGlobalPixels(coords, myMap.getZoom())
-					);
-
-					var mapContainer = document.getElementById('map').getBoundingClientRect();
-
-					// Центрируем попап относительно маркера
-					officeElement.style.left = `${pixelCoords[0] - mapContainer.left - officeElement.offsetWidth / 2}px`;
-					officeElement.style.top = `${pixelCoords[1] - mapContainer.top - officeElement.offsetHeight - 10}px`;
-
-					officeElement.style.display = 'block';
-
-					if (!isMobile()) {
-						officeElement.addEventListener('mouseleave', function hidePopup() {
-							officeElement.style.display = 'none';
-							officeElement.removeEventListener('mouseleave', hidePopup);
-						});
-					}
-				}
-			}
-
-			placemarks.forEach(placemark => {
-				myMap.geoObjects.add(placemark);
-
-				if (isMobile()) {
-					// На мобильных попап открывается по клику и остается
-					placemark.events.add('click', function(e) {
-						// Закрываем все другие попапы перед открытием нового
-						document.querySelectorAll('.item-office-map').forEach(el => el.style.display = 'none');
-						showPopup(e);
-					});
-				} else {
-					// На ПК попап открывается при наведении
-					placemark.events.add('mouseenter', function(e) {
-						showPopup(e);
-					});
-
-					placemark.events.add('mouseleave', function(e) {
-						var officeId = e.get('target').properties.get('officeId');
-						var officeElement = document.querySelector(`.item-office-map[data-id="${officeId}"]`);
-
-						if (officeElement) {
-							setTimeout(() => {
-								if (!officeElement.matches(':hover')) {
-									officeElement.style.display = 'none';
-								}
-							}, 300);
-						}
-					});
-				}
-			});
-
-			// Закрытие попапа на мобильных устройствах при клике вне попапа или на другой маркер
-			if (isMobile()) {
-				document.addEventListener('click', function(e) {
-					if (!e.target.closest('.item-office-map') && !e.target.closest('.ymaps-2-1-79-image')) {
-						document.querySelectorAll('.item-office-map').forEach(el => el.style.display = 'none');
-					}
-				});
-			}
-
-			function isMobile() {
-				return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-			}
-		});
-	</script>
-	<script src="js/app.min.js"></script>
+	<script src="js/app.min.js?_v=20250328190257"></script>
 
 </body>
 

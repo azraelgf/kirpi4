@@ -4833,6 +4833,228 @@
                 on: {}
             });
         }
+        if (document.querySelector(".product-detail__gallery")) {
+            const thumbsSwiper = new Swiper(".thumbs-product-swiper", {
+                modules: [ Thumb, Navigation ],
+                spaceBetween: 15,
+                slidesPerView: 6,
+                observer: true,
+                direction: "vertical",
+                observeParents: true,
+                watchSlidesProgress: true,
+                navigation: {
+                    prevEl: ".thumbs-product-button-prev",
+                    nextEl: ".thumbs-product-button-next"
+                },
+                breakpoints: {
+                    320: {
+                        slidesPerView: 4,
+                        spaceBetween: 10
+                    },
+                    480: {
+                        slidesPerView: 5,
+                        spaceBetween: 16
+                    },
+                    992: {
+                        slidesPerView: 5,
+                        spaceBetween: 12
+                    },
+                    1024: {
+                        slidesPerView: 6,
+                        spaceBetween: 12
+                    },
+                    1200: {
+                        slidesPerView: 7,
+                        spaceBetween: 12
+                    }
+                }
+            });
+            new Swiper(".main-product-swiper", {
+                modules: [ Navigation, Thumb ],
+                observer: true,
+                observeParents: true,
+                slidesPerView: 1,
+                spaceBetween: 20,
+                speed: 800,
+                thumbs: {
+                    swiper: thumbsSwiper
+                },
+                navigation: {
+                    prevEl: ".main-product-prev",
+                    nextEl: ".main-product-next"
+                },
+                on: {}
+            });
+        }
+        if (document.querySelector(".reviews-product__body")) new Swiper(".reviews-product__body", {
+            modules: [ Navigation, Pagination ],
+            observer: true,
+            observeParents: true,
+            slidesPerView: 1,
+            spaceBetween: 20,
+            speed: 800,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true
+            },
+            navigation: {
+                prevEl: ".reviews-product-prev",
+                nextEl: ".reviews-product-next"
+            },
+            breakpoints: {
+                320: {
+                    slidesPerView: 1,
+                    spaceBetween: 16
+                },
+                480: {
+                    slidesPerView: 1.7,
+                    spaceBetween: 20
+                },
+                992: {
+                    slidesPerView: 2,
+                    spaceBetween: 20
+                },
+                1268: {
+                    slidesPerView: 3,
+                    spaceBetween: 30
+                }
+            },
+            on: {}
+        });
+        if (document.querySelector(".tabs-project__gallery")) {
+            const thumbsSwiper1 = new Swiper(".thumbs-swiper-project-1", {
+                modules: [ Thumb ],
+                spaceBetween: 16,
+                slidesPerView: 4,
+                observer: true,
+                observeParents: true,
+                watchSlidesProgress: true,
+                breakpoints: {
+                    320: {
+                        spaceBetween: 8
+                    },
+                    480: {},
+                    767.98: {
+                        direction: "vertical"
+                    }
+                }
+            });
+            new Swiper(".main-swiper-project-1", {
+                modules: [ Navigation, Thumb ],
+                observer: true,
+                observeParents: true,
+                slidesPerView: 1,
+                spaceBetween: 20,
+                speed: 800,
+                thumbs: {
+                    swiper: thumbsSwiper1
+                },
+                navigation: {
+                    prevEl: ".main-swiper-prev",
+                    nextEl: ".main-swiper-next"
+                },
+                on: {}
+            });
+            const thumbsSwiper2 = new Swiper(".thumbs-swiper-project-2", {
+                modules: [ Thumb ],
+                spaceBetween: 16,
+                slidesPerView: 4,
+                observer: true,
+                observeParents: true,
+                watchSlidesProgress: true,
+                breakpoints: {
+                    320: {
+                        spaceBetween: 8
+                    },
+                    480: {},
+                    767.98: {
+                        direction: "vertical"
+                    }
+                }
+            });
+            new Swiper(".main-swiper-project-2", {
+                modules: [ Navigation, Thumb ],
+                observer: true,
+                observeParents: true,
+                slidesPerView: 1,
+                spaceBetween: 20,
+                speed: 800,
+                thumbs: {
+                    swiper: thumbsSwiper2
+                },
+                navigation: {
+                    prevEl: ".main-swiper-prev",
+                    nextEl: ".main-swiper-next"
+                },
+                on: {}
+            });
+            const thumbsSwiper3 = new Swiper(".thumbs-swiper-project-3", {
+                modules: [ Thumb ],
+                spaceBetween: 16,
+                slidesPerView: 4,
+                observer: true,
+                observeParents: true,
+                watchSlidesProgress: true,
+                breakpoints: {
+                    320: {
+                        spaceBetween: 8
+                    },
+                    480: {},
+                    767.98: {
+                        direction: "vertical"
+                    }
+                }
+            });
+            new Swiper(".main-swiper-project-3", {
+                modules: [ Navigation, Thumb ],
+                observer: true,
+                observeParents: true,
+                slidesPerView: 1,
+                spaceBetween: 20,
+                speed: 800,
+                thumbs: {
+                    swiper: thumbsSwiper3
+                },
+                navigation: {
+                    prevEl: ".main-swiper-prev",
+                    nextEl: ".main-swiper-next"
+                },
+                on: {}
+            });
+            const thumbsSwiper4 = new Swiper(".thumbs-swiper-project-4", {
+                modules: [ Thumb ],
+                slidesPerView: 4,
+                spaceBetween: 16,
+                observer: true,
+                observeParents: true,
+                watchSlidesProgress: true,
+                breakpoints: {
+                    320: {
+                        spaceBetween: 8
+                    },
+                    480: {},
+                    767.98: {
+                        direction: "vertical"
+                    }
+                }
+            });
+            new Swiper(".main-swiper-project-4", {
+                modules: [ Navigation, Thumb ],
+                observer: true,
+                observeParents: true,
+                slidesPerView: 1,
+                spaceBetween: 20,
+                speed: 800,
+                thumbs: {
+                    swiper: thumbsSwiper4
+                },
+                navigation: {
+                    prevEl: ".main-swiper-prev",
+                    nextEl: ".main-swiper-next"
+                },
+                on: {}
+            });
+        }
     }
     window.addEventListener("load", (function(e) {
         initSliders();
@@ -4940,6 +5162,9 @@
             targetElement.classList.toggle("_active");
             document.querySelector(".filter__content").classList.toggle("_show-active");
         }
+        if (targetElement.closest(".product__compare")) targetElement.classList.toggle("compare-active");
+        if (targetElement.closest(".product-compare")) targetElement.classList.toggle("compare-active");
+        if (targetElement.closest(".btn-favorite")) targetElement.classList.toggle("_fav-active");
     }
     if (document.querySelector(".js-current-year")) {
         const currentYear = (new Date).getFullYear(), currentYearWrapper = document.querySelector(".js-current-year");
