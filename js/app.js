@@ -4363,6 +4363,293 @@
                 }
             }
         }
+        const hasBodyUtils = typeof bodyLockStatus !== "undefined" && typeof bodyLock === "function" && typeof bodyUnlock === "function";
+        const _body = document.documentElement;
+        const _lockCls = "lock";
+        class Popup {
+            constructor(options = {}) {
+                const config = {
+                    init: true,
+                    attributeOpenButton: "data-popup",
+                    attributeCloseButton: "data-close",
+                    fixElementSelector: "[data-lp]",
+                    youtubeAttribute: "data-popup-youtube",
+                    youtubePlaceAttribute: "data-popup-youtube-place",
+                    setAutoplayYoutube: true,
+                    classes: {
+                        popup: "popup",
+                        popupContent: "popup__content",
+                        popupActive: "popup_show",
+                        bodyActive: "popup-show",
+                        popupOverlay: "popup__overlay"
+                    },
+                    overlayClose: true,
+                    waitForTransition: true,
+                    focusCatch: true,
+                    closeEsc: true,
+                    bodyLock: true,
+                    hashSettings: {
+                        location: true,
+                        goHash: true
+                    },
+                    on: {
+                        beforeOpen() {},
+                        afterOpen() {},
+                        beforeClose() {},
+                        afterClose() {}
+                    }
+                };
+                this.options = {
+                    ...config,
+                    ...options,
+                    classes: {
+                        ...config.classes,
+                        ...options.classes || {}
+                    },
+                    hashSettings: {
+                        ...config.hashSettings,
+                        ...options.hashSettings || {}
+                    },
+                    on: {
+                        ...config.on,
+                        ...options.on || {}
+                    }
+                };
+                this.youTubeCode = null;
+                this.isOpen = false;
+                this._reopen = false;
+                this._selectorOpen = false;
+                this.bodyLock = false;
+                this.hash = false;
+                this._dataValue = false;
+                this.lastFocusEl = null;
+                this.previousActiveElement = null;
+                this.targetOpen = {
+                    selector: null,
+                    element: null
+                };
+                this.previousOpen = {
+                    selector: null,
+                    element: null
+                };
+                this.lastClosed = {
+                    selector: null,
+                    element: null
+                };
+                this._focusEl = [ "a[href]", 'input:not([disabled]):not([type="hidden"]):not([aria-hidden])', "button:not([disabled]):not([aria-hidden])", "select:not([disabled]):not([aria-hidden])", "textarea:not([disabled]):not([aria-hidden])", "area[href]", "iframe", "object", "embed", "[contenteditable]", '[tabindex]:not([tabindex^="-"])' ];
+                this.options.init && this._init();
+            }
+            _init() {
+                this._events();
+            }
+            _events() {
+                document.addEventListener("click", (e => {
+                    const openBtn = e.target.closest(`[${this.options.attributeOpenButton}]`);
+                    if (openBtn) {
+                        e.preventDefault();
+                        this._dataValue = openBtn.getAttribute(this.options.attributeOpenButton) || "error";
+                        this.youTubeCode = openBtn.getAttribute(this.options.youtubeAttribute) || null;
+                        if (this._dataValue !== "error") {
+                            if (!this.isOpen) this.lastFocusEl = openBtn;
+                            this.targetOpen.selector = this._dataValue;
+                            this._selectorOpen = true;
+                            this.open();
+                        }
+                        return;
+                    }
+                    const closeBtn = e.target.closest(`[${this.options.attributeCloseButton}]`);
+                    const isOverlay = e.target.classList?.contains(this.options.classes.popupOverlay);
+                    const rootPopup = e.target.closest(`.${this.options.classes.popup}`);
+                    const clickedOutsideContent = rootPopup && !e.target.closest(`.${this.options.classes.popupContent}`) && this.isOpen;
+                    if (closeBtn || this.options.overlayClose && (isOverlay || clickedOutsideContent)) {
+                        e.preventDefault();
+                        this.close();
+                        return;
+                    }
+                }));
+                document.addEventListener("keydown", (e => {
+                    if (this.options.closeEsc && this.isOpen && (e.key === "Escape" || e.keyCode === 27)) {
+                        e.preventDefault();
+                        this.close();
+                        return;
+                    }
+                    if (this.options.focusCatch && this.isOpen && e.key === "Tab") {
+                        this._focusCatch(e);
+                        return;
+                    }
+                }));
+                if (this.options.hashSettings.goHash) {
+                    window.addEventListener("hashchange", (() => {
+                        if (window.location.hash) this._openToHash(); else this.close(this.targetOpen.selector);
+                    }));
+                    window.addEventListener("load", (() => {
+                        if (window.location.hash) this._openToHash();
+                    }));
+                }
+            }
+            open(selectorValue) {
+                const canProceed = hasBodyUtils ? bodyLockStatus : true;
+                if (!canProceed) return;
+                this.bodyLock = _body.classList.contains(_lockCls) && !this.isOpen;
+                if (selectorValue && typeof selectorValue === "string" && selectorValue.trim()) {
+                    this.targetOpen.selector = selectorValue;
+                    this._selectorOpen = true;
+                }
+                if (this.isOpen) {
+                    this._reopen = true;
+                    this.close();
+                    return;
+                }
+                if (!this._selectorOpen) this.targetOpen.selector = this.lastClosed.selector;
+                this.previousActiveElement = document.activeElement;
+                this.targetOpen.element = document.querySelector(this.targetOpen.selector);
+                if (!this.targetOpen.element) return;
+                if (this.youTubeCode) this._loadYouTube();
+                if (this.options.hashSettings.location) {
+                    this._getHash();
+                    this._setHash();
+                }
+                this.options.on.beforeOpen(this);
+                document.dispatchEvent(new CustomEvent("beforePopupOpen", {
+                    detail: {
+                        popup: this
+                    }
+                }));
+                this.targetOpen.element.classList.add(this.options.classes.popupActive);
+                this.targetOpen.element.setAttribute("aria-hidden", "false");
+                this.targetOpen.element.setAttribute("role", "dialog");
+                this.targetOpen.element.setAttribute("aria-modal", "true");
+                _body.classList.add(this.options.classes.bodyActive);
+                if (!this._reopen && this.options.bodyLock && hasBodyUtils) !this.bodyLock && bodyLock();
+                this.previousOpen.selector = this.targetOpen.selector;
+                this.previousOpen.element = this.targetOpen.element;
+                this._selectorOpen = false;
+                this.isOpen = true;
+                setTimeout((() => this._focusTrap()), 50);
+                this.options.on.afterOpen(this);
+                document.dispatchEvent(new CustomEvent("afterPopupOpen", {
+                    detail: {
+                        popup: this
+                    }
+                }));
+            }
+            async close(selectorValue) {
+                if (selectorValue && typeof selectorValue === "string" && selectorValue.trim()) this.previousOpen.selector = selectorValue;
+                const canProceed = hasBodyUtils ? bodyLockStatus : true;
+                if (!this.isOpen || !canProceed) return;
+                this.options.on.beforeClose(this);
+                document.dispatchEvent(new CustomEvent("beforePopupClose", {
+                    detail: {
+                        popup: this
+                    }
+                }));
+                if (this.youTubeCode) {
+                    const video = this.previousOpen.element.querySelector(`[${this.options.youtubePlaceAttribute}]`);
+                    if (video) video.innerHTML = "";
+                }
+                const contentEl = this.previousOpen.element.querySelector(`.${this.options.classes.popupContent}`);
+                const overlayEl = this.previousOpen.element.querySelector(`.${this.options.classes.popupOverlay}`);
+                this.previousOpen.element.classList.remove(this.options.classes.popupActive);
+                this.previousOpen.element.setAttribute("aria-hidden", "true");
+                if (this.options.waitForTransition) try {
+                    if (contentEl) await this._waitTransitionEnd(contentEl, "transform", 500); else if (overlayEl) await this._waitTransitionEnd(overlayEl, "opacity", 800);
+                } catch (_) {}
+                if (!this._reopen) {
+                    _body.classList.remove(this.options.classes.bodyActive);
+                    if (this.options.bodyLock && hasBodyUtils) !this.bodyLock && bodyUnlock();
+                    this.isOpen = false;
+                } else this._reopen = false;
+                this._removeHash();
+                this.lastClosed.selector = this.previousOpen.selector;
+                this.lastClosed.element = this.previousOpen.element;
+                this.options.on.afterClose(this);
+                document.dispatchEvent(new CustomEvent("afterPopupClose", {
+                    detail: {
+                        popup: this
+                    }
+                }));
+                setTimeout((() => this._focusTrap()), 50);
+            }
+            _waitTransitionEnd(el, prop = "transform", fallbackMs = 400) {
+                return new Promise((resolve => {
+                    let done = false;
+                    const t = setTimeout((() => {
+                        if (!done) {
+                            done = true;
+                            resolve();
+                        }
+                    }), fallbackMs);
+                    const onEnd = e => {
+                        if (e.target !== el || e.propertyName !== prop) return;
+                        if (done) return;
+                        done = true;
+                        clearTimeout(t);
+                        el.removeEventListener("transitionend", onEnd);
+                        resolve();
+                    };
+                    el.addEventListener("transitionend", onEnd);
+                }));
+            }
+            _focusCatch(e) {
+                const focusable = this.targetOpen?.element?.querySelectorAll(this._focusEl) || [];
+                const arr = Array.from(focusable);
+                if (!arr.length) return;
+                const i = arr.indexOf(document.activeElement);
+                if (e.shiftKey && i === 0) {
+                    arr[arr.length - 1].focus();
+                    e.preventDefault();
+                }
+                if (!e.shiftKey && i === arr.length - 1) {
+                    arr[0].focus();
+                    e.preventDefault();
+                }
+            }
+            _focusTrap() {
+                const root = this.previousOpen.element;
+                if (!root) return;
+                const focusable = root.querySelectorAll(this._focusEl);
+                if (!focusable.length) {
+                    if (!this.isOpen && this.lastFocusEl) this.lastFocusEl.focus();
+                    return;
+                }
+                const auto = root.querySelector("[autofocus]");
+                if (!this.isOpen && this.lastFocusEl) this.lastFocusEl.focus(); else (auto || focusable[0]).focus();
+            }
+            _loadYouTube() {
+                const code = this.youTubeCode;
+                const url = `https://www.youtube.com/embed/${code}?rel=0&showinfo=0&autoplay=1`;
+                const iframe = document.createElement("iframe");
+                iframe.setAttribute("allowfullscreen", "");
+                iframe.setAttribute("allow", `${this.options.setAutoplayYoutube ? "autoplay;" : ""} encrypted-media`);
+                iframe.setAttribute("src", url);
+                const place = this.targetOpen.element.querySelector(`[${this.options.youtubePlaceAttribute}]`);
+                if (place) {
+                    place.innerHTML = "";
+                    place.appendChild(iframe);
+                }
+            }
+            _openToHash() {
+                const cls = window.location.hash.replace("#", "");
+                const el = document.querySelector(`#${cls}`) || document.querySelector(`.${cls}`);
+                if (el) this.open(`#${cls}`);
+            }
+            _getHash() {
+                this.hash = this.targetOpen.selector.includes("#") ? this.targetOpen.selector : this.targetOpen.selector.replace(".", "#");
+            }
+            _setHash() {
+                if (location.hash !== this.hash) history.pushState("", "", this.hash);
+            }
+            _removeHash() {
+                if (location.hash) history.pushState("", "", location.href.split("#")[0]);
+            }
+        }
+        const popup = new Popup({
+            on: {
+                afterOpen(ctx) {},
+                afterClose(ctx) {}
+            }
+        });
+        if (window.flsModules) window.flsModules.popup = popup;
         let formValidate = {
             getErrors(form) {
                 let error = 0;
