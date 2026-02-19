@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<title>Избранное</title>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="css/style.min.css?_v=20260219192416">
+	<link rel="shortcut icon" href="favicon.ico">
+	<!-- <meta name="robots" content="noindex, nofollow"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--	 <style>body{opacity: 0;}</style>-->
+	<style>
+		/* Начальное состояние */
+		body {
+			opacity: 0;
+			transition: opacity 0.5s ease-in-out;
+		}
+
+		/* Класс, добавляемый после загрузки */
+		html.loaded body {
+			opacity: 1;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="wrapper">
+		<div class="info-top">Более 1500&nbsp;товаров для&nbsp;строительства и&nbsp;благоустройства домов с&nbsp;доставкой.</div>
+		<header class="header">
+			<div class="header__top top-header">
+				<div class="top-header__container">
+					<div class="top-header__beige beige">
+						6 офисов
+					</div>
+					<div class="header__menu menu">
+						<nav class="menu__body">
+							<ul class="menu__list">
+								<li class="menu__item"><a href="tel:+78432070872" class="menu__tel _icon-phone"><span>+7 843 207-08-72</span></a>
+								</li>
+								<li class="menu__item _active-menu"><a href="#" class="menu__link beige">% Акции</a></li>
+								<li class="menu__item"><a href="#" class="menu__link beige">Услуги</a></li>
+								<li class="menu__item"><a href="#" class="menu__link beige">Архитекторам</a></li>
+								<li class="menu__item"><a href="#" class="menu__link beige">Застройщикам</a></li>
+								<li class="menu__item"><a href="#" class="menu__link beige">Online калькулятор</a></li>
+								<li class="menu__item"><a href="#" class="menu__link beige">Проекты домов</a></li>
+								<li class="menu__item"><a href="#" class="menu__link beige _green">Журнал о стройке</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+			<div class="header__bottom bottom-header">
+				<div class="bottom-header__container">
+					<div class="bottom-header__left">
+						<button type="button" class="icon-menu"><i class="menu__icon"><span></span></i>Меню</button>
+						<a href="/" class="bottom-header__logo logo"><img src="img/logo.svg" alt="Logo"></a>
+						<a href="" class="bottom-header__btn _icon-burger">Каталог</a>
+						<div class="bottom-header__search" data-da=".header__bottom, 991.98">
+							<div class="search-block">
+								<form action="#">
+									<div class="search-block__inner">
+										<button class="search-block__btn _icon-search" type="submit"></button>
+										<input class="search-block__input input" autocomplete="off" type="search" placeholder="Поиск…">
+									</div>
+								</form>
+								<div class="search-block__mod">
+									<ul class="mod-search">
+										<li class="mod-search__item">
+											<a class="stretched-link" href=""></a>
+											<div class="mod-search__item-img">
+												<img class="ibg" src="img/products/new/01.webp" alt="Image">
+											</div>
+											<div class="mod-search__item-title">Кирпич цокольный рядовой Алексеевский 1.4НФ М125–150
+												с 3-мя отверстиями</div>
+										</li>
+										<li class="mod-search__item">
+											<a class="stretched-link" href=""></a>
+											<div class="mod-search__item-img">
+												<img class="ibg" src="img/products/new/01.webp" alt="Image">
+											</div>
+											<div class="mod-search__item-title">Кирпич цокольный рядовой Алексеевский 1.4НФ М125–150
+												с 3-мя отверстиями</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="bottom-header__actions">
+						<a href="tel:+78432070872" class="bottom-header__icon hidden-tablet icon-btn _icon-phone"></a>
+						<a href="" class="bottom-header__icon icon-btn _icon-avatar"></a>
+						<a href="" class="bottom-header__icon icon-btn _icon-up-down"></a>
+						<a href="" class="bottom-header__icon icon-btn _icon-heart"></a>
+						<a href="" class="bottom-header__icon _icon-cart button button_outline"><span>Корзина</span></a>
+					</div>
+				</div>
+			</div>
+		</header>
+		<nav class="menu-fix">
+			<ul class="menu-fix__list">
+				<li><a class="menu-fix__link _icon-home" href="">Главная</a></li>
+				<li><a class="menu-fix__link _icon-burger" href="">Каталог</a></li>
+				<li><a class="menu-fix__link _icon-heart" href="">Избранное</a></li>
+				<li><a class="menu-fix__link _icon-avatar" href="">Профиль</a></li>
+				<li><a class="menu-fix__link _icon-cart" href="">Корзина</a></li>
+			</ul>
+		</nav>
+		<div class="search-overlay" data-search-close></div>
+
+		<main class="page">
+			<nav class="breadcrumbs">
+				<div class="breadcrumbs__container">
+					<ul class="breadcrumbs__list">
+						<li class="breadcrumbs__item"><a href="" class="breadcrumbs__link"><span>Главная</span></a></li>
+						<li class="breadcrumbs__item"><span class="breadcrumbs__current">Избранное</span></li>
+					</ul>
+				</div>
+			</nav>
+			<section class="section-inner">
+				<div class="section-inner__container">
+					<h1 class="section-inner__title title">Избранное</h1>
+					<div class="fav-wrapper">
+						<div class="fav-wrapper__content">
+							<ol class="estimates">
+								<li class="estimate estimate_fav">
+									<button class="estimate__del" type="button">
+										<svg>
+											<use xlink:href="img/icons/icons.svg#del"></use>
+										</svg>
+									</button>
+									<div class="estimate__img">
+										<div class="label label_sale">—15%</div>
+										<img src="img/cases/01/description/smeta-01.webp" alt="Image" class="ibg">
+									</div>
+									<div class="estimate__top">
+										<small>Артикул: 8593244</small>
+										<strong>
+											Кирпич цокольный рядовой Алексеевский 1.4НФ М125–150
+											с&nbsp;3-мя отверстиями
+										</strong>
+									</div>
+									<div class="estimate__info">
+										<div class="estimate__price">
+											<div class="estimate__price-block">
+												<div class="estimate__current">
+													<strong>18.95</strong>
+													<small>₽/шт</small>
+												</div>
+												<div class="estimate__old">
+													22,50 ₽
+												</div>
+											</div>
+											<div class="estimate__dop-price">
+												<small>245 ₽/м2</small>
+												<small>2 450 ₽/м3</small>
+											</div>
+											<div class="estimate__nali4ie">
+												<i class="_icon-check"></i>
+												В наличии
+											</div>
+										</div>
+										<div class="estimate__total total-estimate">
+											<div class="total-estimate__top">
+												<div data-quantity class="quantity">
+													<button data-quantity-minus type="button" class="quantity__button quantity__button_minus"></button>
+													<div class="quantity__input"><input data-quantity-value autocomplete="off" type="text" name="form[]" value="1">
+													</div>
+													<button data-quantity-plus type="button" class="quantity__button quantity__button_plus"></button>
+
+												</div>
+											</div>
+											<div class="total-estimate__bottom">
+												<button class="product__btn button button_fw _icon-cart" type="button">В
+													корзину
+												</button>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="estimate estimate_fav">
+									<button class="estimate__del" type="button">
+										<svg>
+											<use xlink:href="img/icons/icons.svg#del"></use>
+										</svg>
+									</button>
+									<div class="estimate__img">
+										<div class="label label_sale">—15%</div>
+										<img src="img/cases/01/description/smeta-01.webp" alt="Image" class="ibg">
+									</div>
+									<div class="estimate__top">
+										<small>Артикул: 8593244</small>
+										<strong>
+											Кирпич цокольный рядовой Алексеевский 1.4НФ М125–150
+											с&nbsp;3-мя отверстиями
+										</strong>
+									</div>
+									<div class="estimate__info">
+										<div class="estimate__price">
+											<div class="estimate__price-block">
+												<div class="estimate__current">
+													<strong>18.95</strong>
+													<small>₽/шт</small>
+												</div>
+												<div class="estimate__old">
+													22,50 ₽
+												</div>
+											</div>
+											<div class="estimate__dop-price">
+												<small>245 ₽/м2</small>
+												<small>2 450 ₽/м3</small>
+											</div>
+											<div class="estimate__nali4ie">
+												<i class="_icon-check"></i>
+												В наличии
+											</div>
+										</div>
+										<div class="estimate__total total-estimate">
+											<div class="total-estimate__top">
+												<div data-quantity class="quantity">
+													<button data-quantity-minus type="button" class="quantity__button quantity__button_minus"></button>
+													<div class="quantity__input"><input data-quantity-value autocomplete="off" type="text" name="form[]" value="1">
+													</div>
+													<button data-quantity-plus type="button" class="quantity__button quantity__button_plus"></button>
+
+												</div>
+											</div>
+											<div class="total-estimate__bottom">
+												<button class="product__btn button button_fw _icon-cart" type="button">В
+													корзину
+												</button>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ol>
+						</div>
+						<div class="fav-wrapper__aside">
+							<div class="product">
+								<a class="stretched-link" href=""></a>
+								<div class="product__img">
+									<div class="label label_sale">—15%</div>
+									<img class="ibg" src="img/products/hot/01.webp" alt="Image">
+									<button class="product__compare _icon-up-down" type="button"></button>
+								</div>
+								<div class="product__body">
+									<div class="product__rating">
+										<small>Артикул: 8593244</small>
+										<div class="rating rating_set">
+											<img class="rating__icon" src="img/icons/star.svg" alt="Image">
+											<div class="rating__body">
+												<div class="rating__active"></div>
+												<div class="rating__items">
+													<input type="radio" class="rating__item" value="1" name="rating">
+													<input type="radio" class="rating__item" value="2" name="rating">
+													<input type="radio" class="rating__item" value="3" name="rating">
+													<input type="radio" class="rating__item" value="4" name="rating">
+													<input type="radio" class="rating__item" value="5" name="rating">
+												</div>
+											</div>
+											<!--можно выставить значение рейтинга здесь .rating__value-->
+											<div class="rating__value">3</div>
+											<!--end  -->
+										</div>
+									</div>
+									<div class="product__title">Кирпич цокольный рядовой Алексеевский 1.4НФ М125–150
+										с&nbsp;3-мя отверстиями
+									</div>
+									<div class="product__body-info">
+										<div class="product__body-price body-price">
+											<div class="body-price__title">Цена:</div>
+											<div class="body-price__main">
+												<div class="body-price__main-cur"><strong>18.95</strong>
+													<small>₽/шт</small>
+												</div>
+												<div class="body-price__main-sale">
+													<del>22,50 ₽</del>
+												</div>
+											</div>
+											<div class="body-price__other">
+												<div class="body-price__other-item">
+													<span>245.95</span>
+													<span>₽/м2</span>
+												</div>
+												<div class="body-price__other-item">
+													<span>2450.95</span>
+													<span>₽/м3</span>
+												</div>
+											</div>
+										</div>
+										<div class="product__availability availability">
+											<div class="availability__total">
+												<!--наличие класс  _icon-check-->
+												<i class="_icon-check"></i>
+												<!--end  -->
+												В&nbsp;наличии
+											</div>
+											<div class="availability__info">
+												<a href="">Проекты<i class="_icon-info"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="product__footer">
+									<button class="product__btn button _icon-cart" type="button">В корзину</button>
+									<div data-quantity class="quantity">
+										<button data-quantity-minus type="button" class="quantity__button quantity__button_minus"></button>
+										<div class="quantity__input"><input data-quantity-value autocomplete="off" type="text" name="form[]" value="1"></div>
+										<button data-quantity-plus type="button" class="quantity__button quantity__button_plus"></button>
+
+									</div>
+								</div>
+							</div>
+							<div class="product">
+								<a class="stretched-link" href=""></a>
+								<div class="product__img">
+									<div class="label label_sale">—15%</div>
+									<img class="ibg" src="img/products/hot/01.webp" alt="Image">
+									<button class="product__compare _icon-up-down" type="button"></button>
+								</div>
+								<div class="product__body">
+									<div class="product__rating">
+										<small>Артикул: 8593244</small>
+										<div class="rating rating_set">
+											<img class="rating__icon" src="img/icons/star.svg" alt="Image">
+											<div class="rating__body">
+												<div class="rating__active"></div>
+												<div class="rating__items">
+													<input type="radio" class="rating__item" value="1" name="rating">
+													<input type="radio" class="rating__item" value="2" name="rating">
+													<input type="radio" class="rating__item" value="3" name="rating">
+													<input type="radio" class="rating__item" value="4" name="rating">
+													<input type="radio" class="rating__item" value="5" name="rating">
+												</div>
+											</div>
+											<!--можно выставить значение рейтинга здесь .rating__value-->
+											<div class="rating__value">3</div>
+											<!--end  -->
+										</div>
+									</div>
+									<div class="product__title">Кирпич цокольный рядовой Алексеевский 1.4НФ М125–150
+										с&nbsp;3-мя отверстиями
+									</div>
+									<div class="product__body-info">
+										<div class="product__body-price body-price">
+											<div class="body-price__title">Цена:</div>
+											<div class="body-price__main">
+												<div class="body-price__main-cur"><strong>18.95</strong>
+													<small>₽/шт</small>
+												</div>
+												<div class="body-price__main-sale">
+													<del>22,50 ₽</del>
+												</div>
+											</div>
+											<div class="body-price__other">
+												<div class="body-price__other-item">
+													<span>245.95</span>
+													<span>₽/м2</span>
+												</div>
+												<div class="body-price__other-item">
+													<span>2450.95</span>
+													<span>₽/м3</span>
+												</div>
+											</div>
+										</div>
+										<div class="product__availability availability">
+											<div class="availability__total">
+												<!--наличие класс  _icon-check-->
+												<i class="_icon-check"></i>
+												<!--end  -->
+												В&nbsp;наличии
+											</div>
+											<div class="availability__info">
+												<a href="">Проекты<i class="_icon-info"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="product__footer">
+									<button class="product__btn button _icon-cart" type="button">В корзину</button>
+									<div data-quantity class="quantity">
+										<button data-quantity-minus type="button" class="quantity__button quantity__button_minus"></button>
+										<div class="quantity__input"><input data-quantity-value autocomplete="off" type="text" name="form[]" value="1"></div>
+										<button data-quantity-plus type="button" class="quantity__button quantity__button_plus"></button>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="offices offices_inner section-bottom">
+				<div class="offices__container">
+					<div class="offices__block">
+						<h2 class="offices__title title">Приглашаем в&nbsp;шоу-рум</h2>
+						<div class="offices__text">
+							В нашем шоу-руме вы сможете оценить и&nbsp;сравнить товары вживую, чтобы уверенно сделать правильный выбор
+							в&nbsp;покупке стройматериалов. Вы получите квалифицированную консультацию и&nbsp;ответы на&nbsp;все интересующие
+							вопросы в&nbsp;удобное для&nbsp;вас время
+						</div>
+					</div>
+					<div class="offices__items">
+						<div class="item-office">
+							<div class="item-office__img">
+								<img class="ibg" src="img/offices/01.webp" alt="Image">
+							</div>
+							<div class="item-office__title">Мамадышский тракт, 56А</div>
+							<div class="item-office__category">шоу-рум</div>
+							<a href="tel:+79999999999" class="item-office__link">+7999999-99-99</a>
+							<div class="item-office__actions">
+								<a href="" class="button">Проложить маршрут</a>
+								<div class="item-office__socials">
+									<a class="_icon-telegram" href=""></a>
+									<a class="_icon-wa" href=""></a>
+								</div>
+							</div>
+						</div>
+						<div class="item-office">
+							<div class="item-office__img">
+								<img class="ibg" src="img/offices/02.webp" alt="Image">
+							</div>
+							<div class="item-office__title">ул.&nbsp;Центральная, 200 (Куюки)</div>
+							<div class="item-office__category">шоу-рум</div>
+							<a href="tel:+79999999999" class="item-office__link">+7999999-99-99</a>
+							<div class="item-office__actions">
+								<a href="" class="button">Проложить маршрут</a>
+								<div class="item-office__socials">
+									<a class="_icon-telegram" href=""></a>
+									<a class="_icon-wa" href=""></a>
+								</div>
+							</div>
+						</div>
+						<div class="item-office">
+							<div class="item-office__img">
+								<img class="ibg" src="img/offices/03.webp" alt="Image">
+							</div>
+							<div class="item-office__title">ул.&nbsp;Азина, 72 (Дербышки)</div>
+							<div class="item-office__category">шоу-рум</div>
+							<a href="tel:+79999999999" class="item-office__link">+7999999-99-99</a>
+							<div class="item-office__actions">
+								<a href="" class="button">Проложить маршрут</a>
+								<div class="item-office__socials">
+									<a class="_icon-telegram" href=""></a>
+									<a class="_icon-wa" href=""></a>
+								</div>
+							</div>
+						</div>
+						<div class="item-office">
+							<div class="item-office__img">
+								<img class="ibg" src="img/offices/04.webp" alt="Image">
+							</div>
+							<div class="item-office__title">ул.&nbsp;Заводская, 7 (Сокуры)</div>
+							<div class="item-office__category">шоу-рум</div>
+							<a href="tel:+79999999999" class="item-office__link">+7999999-99-99</a>
+							<div class="item-office__actions">
+								<a href="" class="button">Проложить маршрут</a>
+								<div class="item-office__socials">
+									<a class="_icon-telegram" href=""></a>
+									<a class="_icon-wa" href=""></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="services">
+				<div class="services__container">
+					<h2 class="services__title margin-title title">Услуги</h2>
+					<div class="services__items">
+						<div class="item-services">
+							<a class="stretched-link" href=""></a>
+							<div class="item-services__body">
+								<div class="item-services__title">Индивидуальный проект&nbsp;дома</div>
+								<div class="item-services__text">Опытные архитекторы учтут все пожелания и&nbsp;создадут
+									проект
+									дома вашей мечты
+								</div>
+							</div>
+							<div class="item-services__img">
+								<img src="img/services/01.webp" alt="Image" class="ibg">
+							</div>
+						</div>
+						<div class="item-services">
+							<a class="stretched-link" href=""></a>
+							<div class="item-services__body">
+								<div class="item-services__title">Подбор и&nbsp;расчёт материалов</div>
+								<div class="item-services__text">Поможем с&nbsp;выбором стройматериалов и&nbsp;рассчитаем
+									необходимое
+									количество — бесплатно
+								</div>
+							</div>
+							<div class="item-services__img">
+								<img src="img/services/02.webp" alt="Image" class="ibg">
+							</div>
+						</div>
+						<div class="item-services">
+							<a class="stretched-link" href=""></a>
+							<div class="item-services__body">
+								<div class="item-services__title">Бесплатное хранение</div>
+								<div class="item-services__text">Хранение оплаченных материалов в&nbsp;течение 30&nbsp;дней.
+									Это&nbsp;удобно, когда нет&nbsp;лишнего места на&nbsp;стройке
+								</div>
+							</div>
+							<div class="item-services__img">
+								<img src="img/services/03.webp" alt="Image" class="ibg">
+							</div>
+						</div>
+						<div class="item-services">
+							<a class="stretched-link" href=""></a>
+							<div class="item-services__body">
+								<div class="item-services__title">Доставка и&nbsp;разгрузка</div>
+								<div class="item-services__text">Доставим материалы в&nbsp;течение 1&nbsp;часа по&nbsp;звонку,
+									благодаря
+									собственному автопарку спецтехники
+								</div>
+							</div>
+							<div class="item-services__img">
+								<img src="img/services/04.webp" alt="Image" class="ibg">
+							</div>
+						</div>
+						<div class="item-services">
+							<a class="stretched-link" href=""></a>
+							<div class="item-services__body">
+								<div class="item-services__title">Монтаж ЖБИ кольца</div>
+								<div class="item-services__text">Доставим материалы в&nbsp;течение 1&nbsp;часа по&nbsp;звонку,
+									благодаря
+									собственному автопарку спецтехники
+								</div>
+							</div>
+							<div class="item-services__img">
+								<img src="img/services/05.webp" alt="Image" class="ibg">
+							</div>
+						</div>
+						<div class="item-services">
+							<a class="stretched-link" href=""></a>
+							<div class="item-services__body">
+								<div class="item-services__title">Монтаж ЖБИ перемычек/прогонов</div>
+								<div class="item-services__text">Доставим материалы в&nbsp;течение 1&nbsp;часа по&nbsp;звонку,
+									благодаря
+									собственному автопарку спецтехники
+								</div>
+							</div>
+							<div class="item-services__img">
+								<img src="img/services/06.webp" alt="Image" class="ibg">
+							</div>
+						</div>
+						<div class="item-services">
+							<a class="stretched-link" href=""></a>
+							<div class="item-services__body">
+								<div class="item-services__title">Монтаж ЖБИ плит перекрытий</div>
+								<div class="item-services__text">Доставим материалы в&nbsp;течение 1&nbsp;часа по&nbsp;звонку,
+									благодаря
+									собственному автопарку спецтехники
+								</div>
+							</div>
+							<div class="item-services__img">
+								<img src="img/services/07.webp" alt="Image" class="ibg">
+							</div>
+						</div>
+						<div class="item-services">
+							<a class="stretched-link" href=""></a>
+							<div class="item-services__body">
+								<div class="item-services__title">Перевозка строительных бытовок</div>
+								<div class="item-services__text">Доставим материалы в&nbsp;течение 1&nbsp;часа по&nbsp;звонку,
+									благодаря
+								</div>
+							</div>
+							<div class="item-services__img">
+								<img src="img/services/08.webp" alt="Image" class="ibg">
+							</div>
+						</div>
+					</div>
+					<button class="services__more button button_light" type="button">Показать все</button>
+				</div>
+			</section>
+
+			<section class="benefits benefits_inner">
+				<div class="benefits__container">
+					<h2 class="benefits__title margin-title title">С&nbsp;нами удобно, выгодно и&nbsp;надёжно!</h2>
+					<div class="benefits__items">
+						<div class="item-benefit">
+							<div class="item-benefit__body">
+								<div class="item-benefit__title">Большой
+									ассортимент
+								</div>
+								<div class="item-benefit__text">
+									У нас вы можете заказать все необходимое для строительства бюджетных и&nbsp;премиум
+									дома, а&nbsp;также для благоустройства придомовой территории
+								</div>
+							</div>
+							<div class="item-benefit__img">
+								<img src="img/benefits/images/01.webp" alt="Image" class="ibg">
+							</div>
+						</div>
+						<div class="item-benefit">
+							<div class="item-benefit__body">
+								<div class="item-benefit__title">Всегда
+									выгодные цены
+								</div>
+								<div class="item-benefit__text">
+									Наши цены одни из&nbsp;самых низких в&nbsp;Казани. Кроме этого, мы&nbsp;даём скидки и&nbsp;дарим
+									подарки при&nbsp;заказе стройматериалов на&nbsp;постройку дома под&nbsp;ключ
+								</div>
+							</div>
+							<div class="item-benefit__img">
+								<img src="img/benefits/images/02.webp" alt="Image" class="ibg">
+							</div>
+						</div>
+						<div class="item-benefit">
+							<div class="item-benefit__body">
+								<div class="item-benefit__title">Персональный менеджер</div>
+								<div class="item-benefit__text">
+									Индивидуальный подход к&nbsp;каждому клиенту. Закрепляем персонального менеджера,
+									который всегда на&nbsp;связи для&nbsp;поддержки и&nbsp;решения любых вопросов
+								</div>
+							</div>
+							<div class="item-benefit__img">
+								<img src="img/benefits/images/03.webp" alt="Image" class="ibg">
+							</div>
+						</div>
+						<div class="item-benefit item-benefit_small">
+							<div class="item-benefit__body">
+								<div class="item-benefit__title">Оплата по&nbsp;факту</div>
+								<div class="item-benefit__text">
+									Принимаем заказы по&nbsp;телефону или Вотсап с&nbsp;оплатой по&nbsp;факту
+								</div>
+							</div>
+							<div class="item-benefit__img">
+								<img src="img/benefits/icons/01.svg" alt="Image" class="ibg">
+							</div>
+						</div>
+						<div class="item-benefit item-benefit_small">
+
+							<div class="item-benefit__body">
+								<div class="item-benefit__title">Бонусы за&nbsp;покупки</div>
+								<div class="item-benefit__text">
+									Материалы поставляются с&nbsp;сертификатами качества
+								</div>
+							</div>
+							<div class="item-benefit__img">
+								<img src="img/benefits/icons/02.svg" alt="Image" class="ibg">
+							</div>
+						</div>
+						<div class="item-benefit item-benefit_small">
+
+							<div class="item-benefit__body">
+								<div class="item-benefit__title">Гарантия качества</div>
+								<div class="item-benefit__text">
+									Действует бонусная система без сгорания накопленных баллов
+								</div>
+							</div>
+							<div class="item-benefit__img">
+								<img src="img/benefits/icons/03.svg" alt="Image" class="ibg">
+							</div>
+						</div>
+						<div class="item-benefit item-benefit_small">
+
+							<div class="item-benefit__body">
+								<div class="item-benefit__title">Мы рядом</div>
+								<div class="item-benefit__text">
+									6&nbsp;шоу-румов для вашего удобства в&nbsp;разных районах Казани
+								</div>
+							</div>
+							<div class="item-benefit__img">
+								<img src="img/benefits/icons/04.svg" alt="Image" class="ibg">
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		</main>
+		<footer class="footer">
+			<div class="footer__top top-footer">
+				<div class="top-footer__container">
+					<a href="/" class="top-footer__logo logo"><img src="img/logo_footer.svg" alt="Logo"></a>
+					<div class="top-footer__menu menu-footer">
+						<ul class="menu-footer__item">
+							<li><a href="">О нас</a></li>
+							<li><a href="">Новости</a></li>
+							<li><a href="">Журнал</a></li>
+							<li><a href="">Вакансии</a></li>
+							<li><a href="">Адреса</a></li>
+						</ul>
+						<ul class="menu-footer__item">
+							<li><a href="">Доставка</a></li>
+							<li><a href="">Оплата</a></li>
+							<li><a href="">Обмен и&nbsp;возврат</a></li>
+							<li><a href="">Расчёт материалов</a></li>
+							<li><a href="">Бесплатное хранение</a></li>
+							<li><a href="">Заказать проект дома</a></li>
+						</ul>
+						<ul class="menu-footer__item">
+							<li><a href="">Каталог</a></li>
+							<li><a href="">Бренды</a></li>
+							<li><a href="">Акции</a></li>
+							<li><a href="">Проекты домов</a></li>
+							<li><a href="">Калькулятор</a></li>
+						</ul>
+						<ul class="menu-footer__item">
+							<li><a href="">Бонусная програма</a></li>
+							<li><a href="">Архитекторам</a></li>
+							<li><a href="">Застройщикам</a></li>
+							<li><a href="">Расчёт материалов</a></li>
+							<li><a href="">Бесплатное хранение</a></li>
+						</ul>
+					</div>
+					<div class="top-footer__contacts">
+						<a href="tel:+77897897878" class="footer__tel">+7 789 789 78 78</a>
+						<div class="footer-social">
+							<a href="" class="footer-social__link">
+								<svg>
+									<use xlink:href="img/icons/icons.svg#wa"></use>
+								</svg>
+							</a>
+							<a href="" class="footer-social__link">
+								<svg>
+									<use xlink:href="img/icons/icons.svg#tg"></use>
+								</svg>
+							</a>
+							<a href="" class="footer-social__link">
+								<svg>
+									<use xlink:href="img/icons/icons.svg#vk"></use>
+								</svg>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer__bottom">
+				<div class="footer__container">
+					<span class="js-current-year"></span> © Купи Кирпич.рф — интернет-магазин строительных материалов
+					Предложения на&nbsp;данном сайте не&nbsp;являются публичной офертой
+				</div>
+			</div>
+
+		</footer>
+
+	</div>
+	<script src="js/app.min.js?_v=20260219192416"></script>
+
+</body>
+
+</html>

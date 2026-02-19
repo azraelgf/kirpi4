@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<title>Вход или регистрация</title>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="css/style.min.css?_v=20260219192416">
+	<link rel="shortcut icon" href="favicon.ico">
+	<!-- <meta name="robots" content="noindex, nofollow"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--	 <style>body{opacity: 0;}</style>-->
+	<style>
+		/* Начальное состояние */
+		body {
+			opacity: 0;
+			transition: opacity 0.5s ease-in-out;
+		}
+
+		/* Класс, добавляемый после загрузки */
+		html.loaded body {
+			opacity: 1;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="wrapper">
+
+		<main class="page">
+			<div class="sign-in sign-in_code">
+				<div class="sign-in__img">
+					<img src="img/code.webp" alt="Image" class="ibg">
+				</div>
+				<div class="sign-in__descriptor">Более 1500&nbsp;товаров для&nbsp;строительства и&nbsp;благоустройства домов
+					с&nbsp;доставкой.
+				</div>
+				<div class="sign-in__content">
+					<a class="sign-in__back _icon-arrow-right" href=""></a>
+					<div class="sign-in__block">
+						<img class="sign-in__logo" src="img/logo.svg" alt="Image">
+						<div class="sign-in__title">Введите код</div>
+						<div class="sign-in__form">
+							<form action="">
+								<div class="form">
+									<div class="form__line-text">
+										Отправили код подтверждения <br> на <span>+7 989 628-19-40</span>
+									</div>
+									<div class="form__line-text">
+										<strong>Никому не сообщайте этот код!</strong>
+									</div>
+									<div class="form__line">
+										<div class="otp" id="otp" aria-label="OTP код из 5 цифр">
+											<input class="form__input input" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Цифра 1" />
+											<input class="form__input input" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Цифра 2" />
+											<input class="form__input input" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Цифра 3" />
+											<input class="form__input input" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Цифра 4" />
+											<input class="form__input input" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Цифра 5" />
+										</div>
+										<!-- Скрытое поле для отправки кода в form -->
+										<input type="hidden" name="otp_code" id="otpHidden" value="">
+									</div>
+									<div class="form__line" id="resendLine">
+										Новый код можно запросить через <span id="resendTimer">60</span>с
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+	</div>
+	<script src="js/app.min.js?_v=20260219192416"></script>
+
+	<script>
+		(function() {
+			const box = document.getElementById('otp');
+			if (!box) return;
+
+			const inputs = Array.from(box.querySelectorAll('input.form__input'));
+			const hidden = document.getElementById('otpHidden');
+			const form = box.closest('form');
+
+			const LENGTH = inputs.length;
+
+			const onlyDigits = (s) => (s || '').replace(/\D/g, '');
+			const getCode = () => inputs.map(i => i.value).join('');
+			const setHidden = () => {
+				if (hidden) hidden.value = getCode();
+			};
+			const setInvalid = (on) => inputs.forEach(i => i.classList.toggle('invalid', on));
+			const focusIndex = (idx) => inputs[Math.max(0, Math.min(LENGTH - 1, idx))].focus();
+
+			// Фокус на первое поле
+			focusIndex(0);
+
+			inputs.forEach((input, idx) => {
+				input.autocomplete = 'one-time-code';
+
+				input.addEventListener('beforeinput', (e) => {
+					if (e.data && /\D/.test(e.data)) e.preventDefault();
+				});
+
+				input.addEventListener('input', () => {
+					input.value = onlyDigits(input.value).slice(0, 1);
+					setInvalid(false);
+
+					if (input.value && idx < LENGTH - 1) focusIndex(idx + 1);
+
+					setHidden();
+
+					// Если все 5 введены — можно автоматически сабмитить (по желанию)
+					// if (getCode().length === LENGTH) form?.requestSubmit?.();
+				});
+
+				input.addEventListener('keydown', (e) => {
+					if (e.key === 'Backspace') {
+						if (input.value) {
+							input.value = '';
+							setHidden();
+							return;
+						}
+						if (idx > 0) {
+							inputs[idx - 1].value = '';
+							focusIndex(idx - 1);
+							setHidden();
+							e.preventDefault();
+						}
+					}
+
+					if (e.key === 'ArrowLeft') {
+						if (idx > 0) focusIndex(idx - 1);
+						e.preventDefault();
+					}
+					if (e.key === 'ArrowRight') {
+						if (idx < LENGTH - 1) focusIndex(idx + 1);
+						e.preventDefault();
+					}
+				});
+
+				input.addEventListener('paste', (e) => {
+					e.preventDefault();
+					const pasted = onlyDigits((e.clipboardData || window.clipboardData).getData('text'));
+					if (!pasted) return;
+
+					const chars = pasted.slice(0, LENGTH).split('');
+					chars.forEach((ch, i) => {
+						inputs[i].value = ch;
+					});
+
+					setInvalid(false);
+					setHidden();
+
+					focusIndex(Math.min(chars.length, LENGTH - 1));
+				});
+			});
+
+			// Валидация при отправке формы
+			if (form) {
+				form.addEventListener('submit', (e) => {
+					const code = getCode();
+					setHidden();
+
+					if (code.length !== LENGTH) {
+						e.preventDefault();
+						setInvalid(true);
+						// Если нужно вывести ошибку в вашем UI — добавьте тут вывод в нужный блок
+					}
+				});
+			}
+
+			// Таймер "Новый код можно запросить через ...с" + кнопка "Запросить"
+			const timerEl = document.getElementById('resendTimer');
+			const lineEl = document.getElementById('resendLine');
+
+			if (timerEl && lineEl) {
+				let seconds = parseInt(timerEl.textContent, 10);
+				if (Number.isNaN(seconds) || seconds < 0) seconds = 0;
+
+				const renderReady = () => {
+					lineEl.classList.add('is-ready');
+					lineEl.innerHTML = '<button class="button button_light" type="button" id="resendBtn">Отправить новый код</button>';
+
+					const btn = document.getElementById('resendBtn');
+					btn.addEventListener('click', async () => {
+						// TODO: вызовите ваш API на отправку нового кода
+						// await fetch('/api/resend', { method: 'POST' });
+
+						// Перезапуск таймера (пример: 60с)
+						seconds = 60;
+						lineEl.classList.remove('is-ready');
+						lineEl.innerHTML = 'Новый код можно запросить через <span id="resendTimer">60</span>с';
+
+						// восстановим ссылки на элементы и запустим заново
+						const newTimerEl = document.getElementById('resendTimer');
+						startCountdown(newTimerEl);
+					});
+				};
+
+				const startCountdown = (el) => {
+					const tick = () => {
+						seconds -= 1;
+						if (seconds <= 0) {
+							renderReady();
+							return;
+						}
+						if (el) el.textContent = String(seconds);
+						setTimeout(tick, 1000);
+					};
+					if (seconds <= 0) renderReady();
+					else setTimeout(tick, 1000);
+				};
+
+				startCountdown(timerEl);
+			}
+		})();
+	</script>
+
+</body>
+
+</html>

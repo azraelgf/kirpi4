@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<title>Вход или регистрация</title>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="css/style.min.css?_v=20260219192416">
+	<link rel="shortcut icon" href="favicon.ico">
+	<!-- <meta name="robots" content="noindex, nofollow"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--	 <style>body{opacity: 0;}</style>-->
+	<style>
+		/* Начальное состояние */
+		body {
+			opacity: 0;
+			transition: opacity 0.5s ease-in-out;
+		}
+
+		/* Класс, добавляемый после загрузки */
+		html.loaded body {
+			opacity: 1;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="wrapper">
+
+		<main class="page">
+			<div class="sign-in">
+				<div class="sign-in__img">
+					<img src="img/sign-in-email.webp" alt="Image" class="ibg">
+				</div>
+				<div class="sign-in__descriptor">Более 1500&nbsp;товаров для&nbsp;строительства и&nbsp;благоустройства домов с&nbsp;доставкой.</div>
+				<div class="sign-in__content">
+					<a class="sign-in__back _icon-arrow-right" href=""></a>
+					<div class="sign-in__block">
+						<img class="sign-in__logo" src="img/logo.svg" alt="Image">
+						<div class="sign-in__title">Вход или регистрация</div>
+						<div class="sign-in__form">
+							<form action="">
+								<div class="form">
+									<div class="form__line">
+										<label class="form__label"> Введите email*
+											<input class="input form__input" autocomplete="off" type="email" name="form[]" placeholder="">
+										</label>
+									</div>
+									<div class="form__line">
+										<button class="button button_big button_fw button_pink" type="submit">Получить код</button>
+									</div>
+									<div class="form__line">
+										<a class="form__link" href="">Войти по телефону</a>
+									</div>
+									<div class="form__line">
+										<small class="form__text">Нажимая кнопку, я даю <a href="">согласие</a> на обработку персональных данных, в&nbsp;соответствии с
+											<a href="">политикой</a></small>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+	</div>
+	<script src="js/app.min.js?_v=20260219192416"></script>
+
+</body>
+
+</html>
