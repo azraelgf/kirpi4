@@ -3528,6 +3528,8 @@ textarea.input {
   border-radius: .3125rem
 }
 .info-devilery__item {
+  align-items: start;
+  align-content: start;
   flex: 1 1 50%;
   display: grid;
   gap: .75rem;
