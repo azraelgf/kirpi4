@@ -8820,6 +8820,7 @@
                 slidesPerView: 1,
                 spaceBetween: 20,
                 speed: 800,
+                loop: true,
                 pagination: {
                     el: ".swiper-pagination",
                     clickable: true
@@ -8838,6 +8839,7 @@
                 slidesPerView: 1,
                 spaceBetween: 20,
                 speed: 800,
+                loop: true,
                 pagination: {
                     el: ".swiper-pagination",
                     clickable: true
@@ -8874,6 +8876,7 @@
                 slidesPerView: 1,
                 spaceBetween: 20,
                 speed: 800,
+                loop: true,
                 pagination: {
                     el: ".swiper-pagination",
                     clickable: true
@@ -8910,6 +8913,7 @@
                 slidesPerView: 1,
                 spaceBetween: 20,
                 speed: 800,
+                loop: true,
                 pagination: {
                     el: ".swiper-pagination",
                     clickable: true
@@ -8946,6 +8950,7 @@
                 slidesPerView: 1,
                 spaceBetween: 20,
                 speed: 800,
+                loop: true,
                 pagination: {
                     el: ".swiper-pagination",
                     clickable: true
@@ -8982,6 +8987,7 @@
                 slidesPerView: 1,
                 spaceBetween: 20,
                 speed: 800,
+                loop: true,
                 pagination: {
                     el: ".swiper-pagination",
                     clickable: true
@@ -9018,6 +9024,7 @@
                 slidesPerView: 1,
                 spaceBetween: 20,
                 speed: 800,
+                loop: true,
                 pagination: {
                     el: ".swiper-pagination",
                     clickable: true
@@ -9132,6 +9139,7 @@
                 slidesPerView: 1,
                 spaceBetween: 20,
                 speed: 800,
+                loop: true,
                 pagination: {
                     el: ".swiper-pagination",
                     clickable: true

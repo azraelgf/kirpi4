@@ -3257,10 +3257,11 @@ textarea.input {
   white-space: nowrap
 }
 .compare-items {
-  grid-template-columns: repeat(5,1fr);
-  align-items: start;
-  display: grid;
+  display: flex;
   gap: 1.875rem
+}
+.compare-items .product {
+  flex: 0 0 18.75rem
 }
 .compare-items::-webkit-scrollbar {
   width: 56px;
@@ -3282,6 +3283,19 @@ textarea.input {
 .fav-wrapper__aside {
   display: grid;
   gap: 1.875rem
+}
+.scrollbar-box {
+  overflow-x: auto;
+  padding-bottom: .625rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--inverse) transparent
+}
+.scrollbar-box::-webkit-scrollbar {
+  width: 6px
+}
+.scrollbar-box::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg,#a855f7,#ec4899);
+  border-radius: 10px
 }
 .sign-in {
   overflow: hidden;
@@ -4013,6 +4027,9 @@ textarea.input {
 .item-office-map__socials a,
 .item-office__socials a {
   transition: color .3s ease-in-out
+}
+.item-office {
+  flex: 0 0 12.5rem
 }
 .item-office-map__title {
   margin-bottom: .625rem
@@ -5877,6 +5894,14 @@ textarea.input {
   .item-office__socials a {
     font-size: 1.75rem
   }
+  .item-office-map__socials svg,
+  .item-office__socials svg {
+    width: 1.75rem
+  }
+  .item-office-map__socials svg,
+  .item-office__socials svg {
+    height: 1.75rem
+  }
   .estimate {
     padding-top: 1rem
   }
@@ -6248,12 +6273,13 @@ textarea.input {
     gap: 1.25rem
   }
   .compare-items {
-    overflow-x: auto;
     grid-template-columns: repeat(5,12.25rem);
     -webkit-transform: rotateX(180deg);
     transform: rotateX(180deg);
-    padding-bottom: .625rem;
     scrollbar-width: auto
+  }
+  .compare-items .product {
+    flex: 0 0 13.75rem
   }
   .compare-items>* {
     -webkit-transform: rotateX(180deg);
@@ -6886,9 +6912,6 @@ textarea.input {
     flex: 0 0 6.25rem;
     width: initial;
     height: initial
-  }
-  .offices__items {
-    flex-wrap: wrap
   }
   .item-office,
   .item-office-map {
@@ -8419,6 +8442,14 @@ textarea.input {
   .item-office__socials a {
     font-size: 1.25rem
   }
+  .item-office-map__socials svg,
+  .item-office__socials svg {
+    width: 1.25rem
+  }
+  .item-office-map__socials svg,
+  .item-office__socials svg {
+    height: 1.25rem
+  }
   .estimate {
     padding-top: .625rem
   }
@@ -9620,6 +9651,14 @@ textarea.input {
   .item-office-map__socials a,
   .item-office__socials a {
     font-size: clamp(1.25rem ,1.0833333333rem + .7407407407vw ,1.75rem)
+  }
+  .item-office-map__socials svg,
+  .item-office__socials svg {
+    width: clamp(1.25rem ,1.0833333333rem + .7407407407vw ,1.75rem)
+  }
+  .item-office-map__socials svg,
+  .item-office__socials svg {
+    height: clamp(1.25rem ,1.0833333333rem + .7407407407vw ,1.75rem)
   }
   .estimate {
     padding-top: clamp(.625rem ,.5rem + .5555555556vw ,1rem)
