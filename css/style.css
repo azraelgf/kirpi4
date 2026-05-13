@@ -4713,6 +4713,7 @@ textarea.input {
   .estimate__top {
     margin-bottom: 1rem
   }
+  .estimate-list__item-order .cart{position:sticky;top:1.25rem}
 }
 @media (min-width:90em) {
   .form__item+.form__item {
